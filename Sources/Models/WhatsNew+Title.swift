@@ -16,7 +16,7 @@ public extension WhatsNew {
         
         /// Creates a new instance of `WhatsNew.Title`
         /// - Parameters:
-        /// - view: A ViewBuilder closure that produces a Title View
+        ///   - view: A ViewBuilder closure that produces a Title View
         public init<Title: View>(
             @ViewBuilder
             view: @escaping () -> Title
@@ -34,8 +34,8 @@ public extension WhatsNew.Title {
     
     /// Creates a new instance of `WhatsNew.Title`
     /// - Parameters:
-    ///  - text: The text to display as the title
-    ///  - foregroundColor: The foreground color. Default value `.primary`
+    ///   - text: The text to display as the title
+    ///   - foregroundColor: The foreground color. Default value `.primary`
     init(
         text: String,
         foregroundColor: Color = .primary
