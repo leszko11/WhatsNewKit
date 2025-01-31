@@ -124,12 +124,7 @@ private extension WhatsNewView {
     
     /// The Title View
     var title: some View {
-        Text(
-            whatsNewText: self.whatsNew.title.text
-        )
-        .font(.largeTitle.bold())
-        .multilineTextAlignment(.center)
-        .fixedSize(horizontal: false, vertical: true)
+        self.whatsNew.title.view()
     }
     
 }

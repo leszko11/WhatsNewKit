@@ -28,6 +28,15 @@ public extension WhatsNew {
     
 }
 
+fileprivate extension View {
+    func styled() -> some View {
+        self
+            .font(.largeTitle.bold())
+            .multilineTextAlignment(.center)
+            .fixedSize(horizontal: false, vertical: true)
+    }
+}
+
 // MARK: - Title+init(text:)
 
 public extension WhatsNew.Title {
@@ -42,13 +51,27 @@ public extension WhatsNew.Title {
     ) {
         self.init {
             SwiftUI.Text(text)
-            .font(.largeTitle.bold())
-            .foregroundColor(foregroundColor)
-            .multilineTextAlignment(.center)
-            .fixedSize(horizontal: false, vertical: true)
+                .styled()
+                .foregroundColor(foregroundColor)
+        }
+        
+    }
+    
+}
+
+// MARK: - Title+init(text:)
+
+/// Creates a new instance of `WhatsNew.Title`
+/// - Parameters:
+///   - text: The text to display as the title
+@available(iOS 15.0, macOS 12.0, *)
+public extension WhatsNew.Title {
+    init(text: WhatsNew.Text) {
+        self.init {
+            SwiftUI.Text(AttributedString(text.attributedString))
+                .styled()
         }
     }
-
 }
 
 // MARK: - ExpressibleByStringLiteral
