@@ -5,32 +5,50 @@ import SwiftUI
 public extension WhatsNew {
     
     /// The WhatsNew Title
-    struct Title: Hashable {
+    struct Title {
         
         // MARK: Properties
         
-        /// The title Text
-        public var text: Text
-        
-        /// The foreground color
-        public var foregroundColor: Color
+        /// A closure that produces the Title View
+        public let view: () -> AnyView
         
         // MARK: Initializer
         
         /// Creates a new instance of `WhatsNew.Title`
         /// - Parameters:
-        ///   - text: The title Text
-        ///   - foregroundColor: The foreground color. Default value `.primary`
-        public init(
-            text: Text,
-            foregroundColor: Color = .primary
+        /// - view: A ViewBuilder closure that produces a Title View
+        public init<Title: View>(
+            @ViewBuilder
+            view: @escaping () -> Title
         ) {
-            self.text = text
-            self.foregroundColor = foregroundColor
+            self.view = { .init(view()) }
         }
         
     }
     
+}
+
+// MARK: - Title+init(text:)
+
+public extension WhatsNew.Title {
+    
+    /// Creates a new instance of `WhatsNew.Title`
+    /// - Parameters:
+    ///  - text: The text to display as the title
+    ///  - foregroundColor: The foreground color. Default value `.primary`
+    init(
+        text: String,
+        foregroundColor: Color = .primary
+    ) {
+        self.init {
+            SwiftUI.Text(text)
+            .font(.largeTitle.bold())
+            .foregroundColor(foregroundColor)
+            .multilineTextAlignment(.center)
+            .fixedSize(horizontal: false, vertical: true)
+        }
+    }
+
 }
 
 // MARK: - ExpressibleByStringLiteral
